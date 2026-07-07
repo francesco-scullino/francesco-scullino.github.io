@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Francesco Scullino, sviluppatore software specializzato nel web. Applicazioni complete dall'interfaccia all'infrastruttura: architettura, sviluppo full stack, cloud e DevOps.">
+<title>Francesco Scullino — Sviluppatore Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141E30;          /* blu inchiostro */
+  --ink-soft:#3C4A63;
+  --paper:#FAFBFD;        /* bianco carta fredda */
+  --panel:#FFFFFF;
+  --line:#D8DEE9;
+  --azure:#1F6FEB;        /* accento azzurro tecnico */
+  --azure-soft:#E8F0FE;
+  --signal:#F2B705;       /* giallo segnale, uso minimo */
+  --grid:rgba(31,111,235,.07); /* quadretti */
+  --header-bg:rgba(250,251,253,.88);
+  --contact-bg:#141E30;
+  --contact-border:transparent;
+  --shadow:rgba(20,30,48,.06);
+  --radius:10px;
+  --display:'Archivo',sans-serif;
+  --body:'IBM Plex Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+[data-theme="dark"]{
+  --ink:#E8EDF5;
+  --ink-soft:#9FACC2;
+  --paper:#0F1522;
+  --panel:#161E2E;
+  --line:#2A3550;
+  --azure:#5B96FF;
+  --azure-soft:#1A2B4A;
+  --grid:rgba(91,150,255,.08);
+  --header-bg:rgba(15,21,34,.88);
+  --contact-bg:#161E2E;
+  --contact-border:var(--line);
+  --shadow:rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background-color:var(--paper);
+  /* foglio a quadretti */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:40px 40px;
+  line-height:1.6;
+  font-size:16px;
+  transition:background-color .25s ease,color .25s ease;
+}
+::selection{background:var(--azure);color:#fff}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.78rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--azure);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--azure)}
+h2{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(1.7rem,3.4vw,2.4rem);
+  letter-spacing:-.02em;
+  margin-bottom:34px;
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  height:60px;
+}
+.nav-right{display:flex;align-items:center;gap:20px}
+.toggle-btn{
+  height:38px;border-radius:19px;
+  border:1px solid var(--line);background:var(--panel);
+  color:var(--ink);font-size:1rem;line-height:1;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  transition:border-color .2s ease,transform .2s ease;
+}
+.toggle-btn:hover{border-color:var(--azure)}
+.theme-toggle{width:38px}
+.theme-toggle:hover{transform:rotate(15deg)}
+.lang-toggle{
+  padding:0 14px;
+  font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.08em;
+}
+.lang-toggle:hover{color:var(--azure)}
+.logo{
+  font-family:var(--mono);font-size:.9rem;font-weight:500;
+  text-decoration:none;color:var(--ink);
+}
+.logo b{color:var(--azure)}
+.logo .typewrap{display:inline-block;min-width:19ch;text-align:left;white-space:nowrap}
+.logo .cursor{
+  display:inline-block;width:1.5px;height:1.05em;
+  background:var(--azure);margin-left:2px;vertical-align:-0.18em;
+}
+@media (prefers-reduced-motion:no-preference){
+  .logo .cursor{animation:blink 1.1s steps(1) infinite}
+  .logo .typewrap.typing .cursor{animation:none;opacity:1}
+  @keyframes blink{50%{opacity:0}}
+}
+nav ul{display:flex;gap:26px;list-style:none}
+nav a{
+  text-decoration:none;color:var(--ink-soft);
+  font-size:.9rem;font-weight:500;
+}
+nav a:hover,nav a:focus-visible{color:var(--azure)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--azure);outline-offset:3px;border-radius:2px}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 72px}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:56px;align-items:center;
+}
+.kicker{
+  font-family:var(--mono);font-size:.8rem;color:var(--ink-soft);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;
+}
+.kicker .dot{color:var(--azure)}
+h1{
+  font-family:var(--display);
+  font-weight:900;
+  font-stretch:112%;
+  font-size:clamp(2.5rem,5.6vw,4rem);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin-bottom:22px;
+}
+h1 .accent{color:var(--azure)}
+.hero p.lead{
+  font-size:1.08rem;color:var(--ink-soft);max-width:44ch;margin-bottom:30px;
+}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--body);font-weight:600;font-size:.92rem;
+  padding:12px 22px;border-radius:var(--radius);
+  text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;
+  border:none;cursor:pointer;
+}
+.btn-primary{background:var(--azure);color:#fff;box-shadow:0 4px 14px rgba(31,111,235,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(31,111,235,.32)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);background:var(--panel)}
+.btn-ghost:hover{border-color:var(--azure);color:var(--azure)}
+
+/* diagramma firma */
+.diagram{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 10px 30px var(--shadow);
+}
+.diagram-caption{
+  font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);
+  display:flex;justify-content:space-between;margin-top:10px;
+}
+.node rect{fill:var(--paper);stroke:var(--line);stroke-width:1.2;rx:8}
+.node.core rect{stroke:var(--azure);stroke-width:1.6;fill:var(--azure-soft)}
+.node text{font-family:var(--mono);font-size:11px;fill:var(--ink)}
+.node .sub{font-size:9px;fill:var(--ink-soft)}
+.link{stroke:var(--azure);stroke-width:1.4;fill:none;stroke-dasharray:5 5;opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .link{animation:flow 1.6s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-20}}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+
+/* ---------- servizi ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;transition:border-color .2s ease,transform .2s ease;
+}
+.card:hover{border-color:var(--azure);transform:translateY(-3px)}
+.card .tag{
+  font-family:var(--mono);font-size:.7rem;color:var(--azure);
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.card h3{font-family:var(--display);font-weight:700;font-size:1.12rem;margin:12px 0 10px}
+.card p{font-size:.92rem;color:var(--ink-soft)}
+
+/* ---------- stack ---------- */
+.stack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.stack-col h3{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);
+  border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;
+}
+.stack-col ul{list-style:none}
+.stack-col li{
+  font-size:.94rem;padding:5px 0;display:flex;align-items:center;gap:9px;
+}
+.stack-col li::before{
+  content:"";width:6px;height:6px;background:var(--azure);border-radius:1px;flex:none;
+}
+
+/* ---------- esperienza ---------- */
+.timeline{border-left:2px solid var(--line);margin-left:6px;padding-left:32px;display:grid;gap:38px}
+.t-item{position:relative}
+.t-item::before{
+  content:"";position:absolute;left:-40px;top:6px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--paper);border:2.5px solid var(--azure);
+}
+.t-item .period{font-family:var(--mono);font-size:.78rem;color:var(--azure);letter-spacing:.06em}
+.t-item h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:6px 0 4px}
+.t-item .place{font-size:.88rem;color:var(--ink-soft);margin-bottom:8px}
+.t-item p{font-size:.94rem;color:var(--ink-soft);max-width:64ch}
+
+/* ---------- contatti ---------- */
+.contact{
+  background:var(--contact-bg);color:#fff;border-radius:16px;
+  border:1px solid var(--contact-border);
+  padding:56px 48px;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:44px;align-items:start;
+}
+.contact h2{color:#fff;margin-bottom:14px}
+.contact p{color:#B9C3D6;font-size:.98rem;max-width:46ch;margin-bottom:26px}
+.social-row{display:flex;gap:12px;flex-wrap:wrap}
+.social-row a{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius);padding:12px 18px;
+  color:#fff;text-decoration:none;font-size:.92rem;font-weight:500;
+  transition:background .2s ease,border-color .2s ease;
+}
+.social-row a:hover{background:rgba(31,111,235,.25);border-color:var(--azure)}
+.social-row .arrow{color:var(--signal);font-family:var(--mono)}
+
+/* form */
+.form-grid{display:grid;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field label{
+  display:block;font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;color:#B9C3D6;
+  margin-bottom:6px;
+}
+.field input,.field textarea{
+  width:100%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--radius);
+  padding:12px 14px;
+  color:#fff;font-family:var(--body);font-size:.94rem;
+  transition:border-color .2s ease,background .2s ease;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.35)}
+.field input:focus,.field textarea:focus{border-color:var(--azure);background:rgba(31,111,235,.12);outline:none}
+.field textarea{min-height:120px;resize:vertical}
+.form-status{
+  font-size:.88rem;margin-top:4px;min-height:1.4em;
+}
+.form-status.ok{color:#7BD88F}
+.form-status.error{color:#FF8A8A}
+
+footer{padding:32px 0;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.75rem;color:var(--ink-soft)}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .stack-grid{grid-template-columns:repeat(2,1fr)}
+  .contact{grid-template-columns:1fr;padding:40px 28px}
+  nav ul{gap:16px}
+  nav ul li:nth-child(n+3){display:none}
+  section{padding:64px 0}
+}
+@media (max-width:520px){
+  .stack-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer .wrap{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="fs://francesco-scullino"><b>fs</b>://<span class="typewrap" aria-hidden="true"><span class="type" id="typewriter">francesco-scullino</span><span class="cursor"></span></span></a>
+    <div class="nav-right">
+      <nav aria-label="Navigazione principale">
+        <ul>
+          <li><a href="#servizi" data-i18n="nav.services">Servizi</a></li>
+          <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
+          <li><a href="#esperienza" data-i18n="nav.experience">Esperienza</a></li>
+          <li><a href="#contatti" data-i18n="nav.contact">Contatti</a></li>
+        </ul>
+      </nav>
+      <button class="toggle-btn lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+      <button class="toggle-btn theme-toggle" id="themeToggle" type="button" aria-label="Attiva tema scuro" aria-pressed="false">☾</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker" data-i18n="hero.kicker">Software Engineer <span class="dot">●</span> Sviluppo Web Full Stack</p>
+        <h1 data-i18n="hero.title">Sviluppatore software,<br>specializzato nel <span class="accent">web</span>.</h1>
+        <p class="lead" data-i18n="hero.lead">Sono Francesco Scullino. Progetto e costruisco applicazioni web complete, dall'interfaccia all'infrastruttura, seguendo ogni fase del ciclo di vita del software: dall'idea al prototipo, fino alla produzione e alla sua evoluzione nel tempo.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contatti" data-i18n="hero.cta1">Parliamo del tuo progetto</a>
+          <a class="btn btn-ghost" href="#esperienza" data-i18n="hero.cta2">Il mio percorso</a>
+        </div>
+      </div>
+
+      <!-- elemento firma: mappa delle competenze -->
+      <figure class="diagram" aria-label="Mappa mentale delle competenze di sviluppo web">
+        <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <!-- collegamenti dal nodo centrale -->
+          <path class="link" d="M195 138 L108 66"/>
+          <path class="link" d="M265 138 L352 66"/>
+          <path class="link" d="M163 150 L142 150"/>
+          <path class="link" d="M297 150 L318 150"/>
+          <path class="link" d="M195 162 L108 234"/>
+          <path class="link" d="M230 170 L230 234"/>
+          <path class="link" d="M265 162 L352 234"/>
+          <!-- rami -->
+          <g class="node">
+            <rect x="38" y="32" width="140" height="38" rx="8"/>
+            <text x="108" y="49" text-anchor="middle" data-i18n="map.frontend">Frontend &amp; UI</text>
+            <text x="108" y="62" text-anchor="middle" class="sub" data-i18n="map.frontend.sub">interfacce · esperienza</text>
+          </g>
+          <g class="node">
+            <rect x="282" y="32" width="140" height="38" rx="8"/>
+            <text x="352" y="49" text-anchor="middle" data-i18n="map.backend">Backend &amp; API</text>
+            <text x="352" y="62" text-anchor="middle" class="sub" data-i18n="map.backend.sub">logica · servizi</text>
+          </g>
+          <g class="node">
+            <rect x="12" y="131" width="130" height="38" rx="8"/>
+            <text x="77" y="148" text-anchor="middle" data-i18n="map.micro">Microservizi</text>
+            <text x="77" y="161" text-anchor="middle" class="sub" data-i18n="map.micro.sub">architettura</text>
+          </g>
+          <g class="node">
+            <rect x="318" y="131" width="130" height="38" rx="8"/>
+            <text x="383" y="148" text-anchor="middle" data-i18n="map.cloud">Cloud</text>
+            <text x="383" y="161" text-anchor="middle" class="sub" data-i18n="map.cloud.sub">scalabilità</text>
+          </g>
+          <g class="node">
+            <rect x="38" y="230" width="140" height="38" rx="8"/>
+            <text x="108" y="247" text-anchor="middle" data-i18n="map.devops">DevOps &amp; CI/CD</text>
+            <text x="108" y="260" text-anchor="middle" class="sub" data-i18n="map.devops.sub">automazione</text>
+          </g>
+          <g class="node">
+            <rect x="282" y="230" width="140" height="38" rx="8"/>
+            <text x="352" y="247" text-anchor="middle" data-i18n="map.data">Dati</text>
+            <text x="352" y="260" text-anchor="middle" class="sub" data-i18n="map.data.sub">persistenza · analisi</text>
+          </g>
+          <g class="node">
+            <rect x="180" y="234" width="100" height="38" rx="8"/>
+            <text x="230" y="251" text-anchor="middle">Mobile</text>
+            <text x="230" y="264" text-anchor="middle" class="sub" data-i18n="map.mobile.sub">multipiattaforma</text>
+          </g>
+          <!-- nodo centrale -->
+          <g class="node core">
+            <rect x="163" y="130" width="134" height="40" rx="8"/>
+            <text x="230" y="148" text-anchor="middle" data-i18n="map.core">Sviluppo Web</text>
+            <text x="230" y="161" text-anchor="middle" class="sub" data-i18n="map.core.sub">full stack</text>
+          </g>
+        </svg>
+        <figcaption class="diagram-caption">
+          <span data-i18n="fig.caption">mappa delle competenze</span>
+          <span>rev. 2026</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section id="servizi">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="services.eyebrow">Servizi</p>
+      <h2 data-i18n="services.title">Cosa posso fare per te</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <span class="tag" data-i18n="card1.tag">Full stack</span>
+          <h3 data-i18n="card1.title">Sviluppo web end-to-end</h3>
+          <p data-i18n="card1.text">Applicazioni complete per il web e app multipiattaforma per mobile e desktop: dall'interfaccia utente alla logica di business, fino alla persistenza dei dati. Un unico interlocutore, dal prototipo alla produzione.</p>
+        </article>
+        <article class="card reveal">
+          <span class="tag" data-i18n="card2.tag">Architettura</span>
+          <h3 data-i18n="card2.title">Progettazione di architetture</h3>
+          <p data-i18n="card2.text">Sistemi pensati per crescere: architetture a microservizi, integrazione tra servizi e riprogettazione di applicazioni esistenti, con un'attenzione particolare alla manutenibilità nel tempo.</p>
+        </article>
+        <article class="card reveal">
+          <span class="tag" data-i18n="card3.tag">Cloud &amp; DevOps</span>
+          <h3 data-i18n="card3.title">Infrastruttura e automazione</h3>
+          <p data-i18n="card3.text">Deployment sul cloud, pipeline di integrazione e rilascio continui, infrastruttura come codice: ambienti riproducibili, rilasci frequenti e senza sorprese.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="stack.eyebrow">Stack tecnologico</p>
+      <h2 data-i18n="stack.title">Gli strumenti del mestiere</h2>
+      <div class="stack-grid">
+        <div class="stack-col reveal">
+          <h3>Backend</h3>
+          <ul>
+            <li>.NET / C#</li>
+            <li>.NET MAUI</li>
+            <li>NestJS</li>
+            <li>GraphQL</li>
+            <li>Microservizi · DAPR</li>
+          </ul>
+        </div>
+        <div class="stack-col reveal">
+          <h3>Frontend</h3>
+          <ul>
+            <li>Angular</li>
+            <li>NGRX</li>
+            <li>TypeScript</li>
+          </ul>
+        </div>
+        <div class="stack-col reveal">
+          <h3>Mobile</h3>
+          <ul>
+            <li>.NET MAUI</li>
+            <li data-i18n="stack.mobile.hybrid">App ibride</li>
+          </ul>
+        </div>
+        <div class="stack-col reveal">
+          <h3>Cloud &amp; DevOps</h3>
+          <ul>
+            <li>Azure · Container Apps</li>
+            <li>Azure DevOps</li>
+            <li>Docker</li>
+            <li>Infrastructure as Code</li>
+            <li>AWS</li>
+          </ul>
+        </div>
+        <div class="stack-col reveal">
+          <h3 data-i18n="stack.data">Dati</h3>
+          <ul>
+            <li>SQL Server · PostgreSQL</li>
+            <li>NoSQL</li>
+            <li>Big Data</li>
+            <li>Machine Learning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPERIENZA -->
+  <section id="esperienza">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="exp.eyebrow">Esperienza</p>
+      <h2 data-i18n="exp.title">Il percorso</h2>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <span class="period" data-i18n="exp1.period">2017 — oggi</span>
+          <h3 data-i18n="exp1.title">Sviluppo di applicazioni enterprise</h3>
+          <p class="place" data-i18n="exp1.place">Full stack developer &amp; software architect</p>
+          <p data-i18n="exp1.text">Quasi dieci anni di applicazioni enterprise e gestionali aziendali, dal prototipo alla produzione: prima sul backend, poi full stack con pari attenzione a client e server, fino alla progettazione di architetture e alla riscrittura di un grande monolite in microservizi con tecnologie cloud-native.</p>
+        </div>
+        <div class="t-item reveal">
+          <span class="period" data-i18n="expR.period">2012 — 2017</span>
+          <h3>Software Developer · Istituto Superiore Mario Boella</h3>
+          <p class="place" data-i18n="expR.place">Centro di ricerca ICT · Microsoft Innovation Center</p>
+          <p data-i18n="expR.text">Ricerca applicata su soluzioni mobile e cloud: servizi geolocalizzati per la gestione delle emergenze, gestione di dati geospaziali e progetti europei, con pubblicazioni scientifiche in conferenze internazionali. Nello stesso periodo, attività di consulente Microsoft all'interno del Microsoft Innovation Center.</p>
+        </div>
+        <div class="t-item reveal">
+          <span class="period" data-i18n="exp3.period">Formazione</span>
+          <h3>Politecnico di Torino</h3>
+          <p data-i18n="exp3.text">Laurea magistrale in ingegneria e, nel 2024, Master universitario di II livello in Quantum Communication and Computing: le basi del mio approccio — rigore, misura, architettura prima del codice — e la curiosità per ciò che viene dopo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div>
+          <p class="eyebrow" style="color:var(--signal)" data-i18n="contact.eyebrow">Contatti</p>
+          <h2 data-i18n="contact.title">Hai un progetto in mente?</h2>
+          <p data-i18n="contact.text">Che si tratti di una nuova applicazione, di una migrazione al cloud o di rimettere in sesto un'architettura che scricchiola: scrivimi e ne parliamo.</p>
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/francesco-scullino-profile/" target="_blank" rel="noopener">LinkedIn <span class="arrow">→</span></a>
+            <a href="https://github.com/francesco-scullino" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <!-- form di contatto: sostituisci IL_TUO_ID con l'endpoint Formspree -->
+        <form class="form-grid" id="contactForm" action="https://formspree.io/f/IL_TUO_ID" method="POST" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="cf-name" data-i18n="form.name">Nome</label>
+              <input id="cf-name" name="name" type="text" required autocomplete="name" data-i18n-placeholder="form.name.ph" placeholder="Il tuo nome">
+            </div>
+            <div class="field">
+              <label for="cf-email" data-i18n="form.email">Email</label>
+              <input id="cf-email" name="_replyto" type="email" required autocomplete="email" placeholder="nome@esempio.it" data-i18n-placeholder="form.email.ph">
+            </div>
+          </div>
+          <div class="field">
+            <label for="cf-message" data-i18n="form.message">Messaggio</label>
+            <textarea id="cf-message" name="message" required data-i18n-placeholder="form.message.ph" placeholder="Raccontami del tuo progetto…"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Nuovo contatto dal sito">
+          <button class="btn btn-primary" type="submit" data-i18n="form.submit">Invia il messaggio</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Francesco Scullino</span>
+  </div>
+</footer>
+
+<script>
+// ---------- i18n ----------
+var I18N = {
+  it: {
+    'meta.description': "Francesco Scullino, sviluppatore software specializzato nel web. Applicazioni complete dall'interfaccia all'infrastruttura: architettura, sviluppo full stack, cloud e DevOps.",
+    'meta.title': 'Francesco Scullino — Sviluppatore Software',
+    'nav.services': 'Servizi', 'nav.stack': 'Stack', 'nav.experience': 'Esperienza', 'nav.contact': 'Contatti',
+    'hero.kicker': 'Software Engineer <span class="dot">●</span> Sviluppo Web Full Stack',
+    'hero.title': 'Sviluppatore software,<br>specializzato nel <span class="accent">web</span>.',
+    'hero.lead': "Sono Francesco Scullino. Progetto e costruisco applicazioni web complete, dall'interfaccia all'infrastruttura, seguendo ogni fase del ciclo di vita del software: dall'idea al prototipo, fino alla produzione e alla sua evoluzione nel tempo.",
+    'hero.cta1': 'Parliamo del tuo progetto', 'hero.cta2': 'Il mio percorso',
+    'map.frontend': 'Frontend & UI', 'map.frontend.sub': 'interfacce · esperienza',
+    'map.backend': 'Backend & API', 'map.backend.sub': 'logica · servizi',
+    'map.micro': 'Microservizi', 'map.micro.sub': 'architettura',
+    'map.cloud': 'Cloud', 'map.cloud.sub': 'scalabilità',
+    'map.devops': 'DevOps & CI/CD', 'map.devops.sub': 'automazione',
+    'map.data': 'Dati', 'map.data.sub': 'persistenza · analisi',
+    'map.mobile.sub': 'multipiattaforma',
+    'stack.mobile.hybrid': 'App ibride',
+    'map.core': 'Sviluppo Web', 'map.core.sub': 'full stack',
+    'fig.caption': 'mappa delle competenze',
+    'services.eyebrow': 'Servizi', 'services.title': 'Cosa posso fare per te',
+    'card1.tag': 'Full stack', 'card1.title': 'Sviluppo web end-to-end',
+    'card1.text': "Applicazioni complete per il web e app multipiattaforma per mobile e desktop: dall'interfaccia utente alla logica di business, fino alla persistenza dei dati. Un unico interlocutore, dal prototipo alla produzione.",
+    'card2.tag': 'Architettura', 'card2.title': 'Progettazione di architetture',
+    'card2.text': "Sistemi pensati per crescere: architetture a microservizi, integrazione tra servizi e riprogettazione di applicazioni esistenti, con un'attenzione particolare alla manutenibilità nel tempo.",
+    'card3.tag': 'Cloud & DevOps', 'card3.title': 'Infrastruttura e automazione',
+    'card3.text': 'Deployment sul cloud, pipeline di integrazione e rilascio continui, infrastruttura come codice: ambienti riproducibili, rilasci frequenti e senza sorprese.',
+    'stack.eyebrow': 'Stack tecnologico', 'stack.title': 'Gli strumenti del mestiere', 'stack.data': 'Dati',
+    'exp.eyebrow': 'Esperienza', 'exp.title': 'Il percorso',
+    'exp1.period': '2017 — oggi', 'exp1.title': 'Sviluppo di applicazioni enterprise', 'exp1.place': 'Full stack developer & software architect',
+    'exp1.text': 'Quasi dieci anni di applicazioni enterprise e gestionali aziendali, dal prototipo alla produzione: prima sul backend, poi full stack con pari attenzione a client e server, fino alla progettazione di architetture e alla riscrittura di un grande monolite in microservizi con tecnologie cloud-native.',
+    'expR.period': '2012 — 2017', 'expR.place': 'Centro di ricerca ICT · Microsoft Innovation Center',
+    'expR.text': 'Ricerca applicata su soluzioni mobile e cloud: servizi geolocalizzati per la gestione delle emergenze, gestione di dati geospaziali e progetti europei, con pubblicazioni scientifiche in conferenze internazionali. Nello stesso periodo, attività di consulente Microsoft all\'interno del Microsoft Innovation Center.',
+    'exp3.period': 'Formazione',
+    'exp3.text': 'Laurea magistrale in ingegneria e, nel 2024, Master universitario di II livello in Quantum Communication and Computing: le basi del mio approccio — rigore, misura, architettura prima del codice — e la curiosità per ciò che viene dopo.',
+    'contact.eyebrow': 'Contatti', 'contact.title': 'Hai un progetto in mente?',
+    'contact.text': 'Che si tratti di una nuova applicazione, di una migrazione al cloud o di rimettere in sesto un\'architettura che scricchiola: scrivimi e ne parliamo.',
+    'form.name': 'Nome', 'form.name.ph': 'Il tuo nome',
+    'form.email': 'Email', 'form.email.ph': 'nome@esempio.it',
+    'form.message': 'Messaggio', 'form.message.ph': 'Raccontami del tuo progetto…',
+    'form.submit': 'Invia il messaggio',
+    'form.sending': 'Invio in corso…',
+    'form.ok': 'Messaggio inviato, ti risponderò al più presto.',
+    'form.error': 'Qualcosa è andato storto. Riprova o scrivimi su LinkedIn.',
+    'form.invalid': 'Compila tutti i campi con un indirizzo email valido.',
+    'theme.toDark': 'Attiva tema scuro', 'theme.toLight': 'Attiva tema chiaro',
+    'lang.switch': 'Switch to English'
+  },
+  en: {
+    'meta.description': 'Francesco Scullino, software developer specialized in the web. Complete applications from interface to infrastructure: architecture, full stack development, cloud and DevOps.',
+    'meta.title': 'Francesco Scullino — Software Developer',
+    'nav.services': 'Services', 'nav.stack': 'Stack', 'nav.experience': 'Experience', 'nav.contact': 'Contact',
+    'hero.kicker': 'Software Engineer <span class="dot">●</span> Full Stack Web Development',
+    'hero.title': 'Software developer,<br>specialized in the <span class="accent">web</span>.',
+    'hero.lead': "I'm Francesco Scullino. I design and build complete web applications, from interface to infrastructure, covering every phase of the software life cycle: from idea to prototype, through to production and its evolution over time.",
+    'hero.cta1': "Let's talk about your project", 'hero.cta2': 'My journey',
+    'map.frontend': 'Frontend & UI', 'map.frontend.sub': 'interfaces · experience',
+    'map.backend': 'Backend & API', 'map.backend.sub': 'logic · services',
+    'map.micro': 'Microservices', 'map.micro.sub': 'architecture',
+    'map.cloud': 'Cloud', 'map.cloud.sub': 'scalability',
+    'map.devops': 'DevOps & CI/CD', 'map.devops.sub': 'automation',
+    'map.data': 'Data', 'map.data.sub': 'persistence · analytics',
+    'map.mobile.sub': 'cross-platform',
+    'stack.mobile.hybrid': 'Hybrid apps',
+    'map.core': 'Web Development', 'map.core.sub': 'full stack',
+    'fig.caption': 'skills map',
+    'services.eyebrow': 'Services', 'services.title': 'What I can do for you',
+    'card1.tag': 'Full stack', 'card1.title': 'End-to-end web development',
+    'card1.text': 'Complete web applications and cross-platform apps for mobile and desktop: from the user interface to business logic and data persistence. A single point of contact, from prototype to production.',
+    'card2.tag': 'Architecture', 'card2.title': 'Architecture design',
+    'card2.text': 'Systems built to grow: microservice architectures, service integration and the redesign of existing applications, with a strong focus on long-term maintainability.',
+    'card3.tag': 'Cloud & DevOps', 'card3.title': 'Infrastructure and automation',
+    'card3.text': 'Cloud deployment, continuous integration and delivery pipelines, infrastructure as code: reproducible environments and frequent releases with no surprises.',
+    'stack.eyebrow': 'Tech stack', 'stack.title': 'Tools of the trade', 'stack.data': 'Data',
+    'exp.eyebrow': 'Experience', 'exp.title': 'The journey',
+    'exp1.period': '2017 — present', 'exp1.title': 'Enterprise application development', 'exp1.place': 'Full stack developer & software architect',
+    'exp1.text': 'Almost ten years of enterprise and business management applications, from prototype to production: first on the backend, then full stack with equal focus on client and server, up to architecture design and the rewriting of a large monolith into microservices with cloud-native technologies.',
+    'expR.period': '2012 — 2017', 'expR.place': 'ICT research center · Microsoft Innovation Center',
+    'expR.text': 'Applied research on mobile and cloud solutions: geolocated services for emergency management, geospatial data handling and European projects, with scientific publications at international conferences. In the same period, work as a Microsoft consultant within the Microsoft Innovation Center.',
+    'exp3.period': 'Education',
+    'exp3.text': "Master's degree in engineering and, in 2024, a second-level postgraduate Master in Quantum Communication and Computing: the foundations of my approach — rigor, precision, architecture before code — and a curiosity for what comes next.",
+    'contact.eyebrow': 'Contact', 'contact.title': 'Have a project in mind?',
+    'contact.text': "Whether it's a new application, a cloud migration or an architecture that's starting to creak: drop me a line and let's talk.",
+    'form.name': 'Name', 'form.name.ph': 'Your name',
+    'form.email': 'Email', 'form.email.ph': 'name@example.com',
+    'form.message': 'Message', 'form.message.ph': 'Tell me about your project…',
+    'form.submit': 'Send message',
+    'form.sending': 'Sending…',
+    'form.ok': "Message sent, I'll get back to you as soon as possible.",
+    'form.error': 'Something went wrong. Try again or reach me on LinkedIn.',
+    'form.invalid': 'Please fill in all fields with a valid email address.',
+    'theme.toDark': 'Switch to dark theme', 'theme.toLight': 'Switch to light theme',
+    'lang.switch': "Passa all'italiano"
+  }
+};
+
+var currentLang = 'it';
+
+function t(key) { return (I18N[currentLang] && I18N[currentLang][key]) || key; }
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.title = t('meta.title');
+  var meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.setAttribute('content', t('meta.description'));
+
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var val = t(el.getAttribute('data-i18n'));
+    if (val.indexOf('<') !== -1) { el.innerHTML = val; } else { el.textContent = val; }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+  });
+
+  var langBtn = document.getElementById('langToggle');
+  langBtn.textContent = lang === 'it' ? 'EN' : 'IT';
+  langBtn.setAttribute('aria-label', t('lang.switch'));
+  updateThemeButton();
+
+  try { localStorage.setItem('lang', lang); } catch (e) { /* storage non disponibile */ }
+}
+
+// ---------- dark mode ----------
+var themeBtn = document.getElementById('themeToggle');
+
+function updateThemeButton() {
+  var dark = document.documentElement.dataset.theme === 'dark';
+  themeBtn.textContent = dark ? '☀' : '☾';
+  themeBtn.setAttribute('aria-pressed', String(dark));
+  themeBtn.setAttribute('aria-label', dark ? t('theme.toLight') : t('theme.toDark'));
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  updateThemeButton();
+  try { localStorage.setItem('theme', theme); } catch (e) { /* ignora */ }
+}
+
+// ---------- init ----------
+(function () {
+  var theme, lang;
+  try {
+    theme = localStorage.getItem('theme');
+    lang = localStorage.getItem('lang');
+  } catch (e) { /* storage non disponibile */ }
+
+  if (theme !== 'dark' && theme !== 'light') {
+    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if (lang !== 'it' && lang !== 'en') {
+    lang = (navigator.language || 'it').toLowerCase().indexOf('it') === 0 ? 'it' : 'en';
+  }
+
+  document.documentElement.dataset.theme = theme;
+  applyLang(lang);
+
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+  document.getElementById('langToggle').addEventListener('click', function () {
+    applyLang(currentLang === 'it' ? 'en' : 'it');
+  });
+})();
+
+// ---------- form di contatto ----------
+(function () {
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    status.className = 'form-status';
+
+    if (!form.checkValidity()) {
+      status.textContent = t('form.invalid');
+      status.classList.add('error');
+      return;
+    }
+
+    status.textContent = t('form.sending');
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (res.ok) {
+        status.textContent = t('form.ok');
+        status.classList.add('ok');
+        form.reset();
+      } else {
+        status.textContent = t('form.error');
+        status.classList.add('error');
+      }
+    }).catch(function () {
+      status.textContent = t('form.error');
+      status.classList.add('error');
+    });
+  });
+})();
+
+// ---------- typewriter sul logo ----------
+(function () {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+  var el = document.getElementById('typewriter');
+  var wrap = el.parentElement;
+  var full = 'francesco-scullino';
+  var TYPE_MS = 90;      // velocità di scrittura
+  var DELETE_MS = 45;    // velocità di cancellazione
+  var HOLD_MS = 20000;   // pausa a testo completo
+  var EMPTY_MS = 600;    // pausa a testo vuoto
+
+  function setTyping(active) {
+    wrap.classList.toggle('typing', active);
+  }
+
+  function typeChar(i) {
+    setTyping(true);
+    el.textContent = full.slice(0, i);
+    if (i < full.length) {
+      setTimeout(function () { typeChar(i + 1); }, TYPE_MS);
+    } else {
+      setTyping(false);
+      setTimeout(function () { deleteChar(full.length); }, HOLD_MS);
+    }
+  }
+
+  function deleteChar(i) {
+    setTyping(true);
+    el.textContent = full.slice(0, i);
+    if (i > 0) {
+      setTimeout(function () { deleteChar(i - 1); }, DELETE_MS);
+    } else {
+      setTyping(false);
+      setTimeout(function () { typeChar(1); }, EMPTY_MS);
+    }
+  }
+
+  setTimeout(function () { deleteChar(full.length); }, HOLD_MS);
+})();
+
+// ---------- reveal on scroll ----------
+if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+} else {
+  document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+}
+</script>
+
+</body>
+</html>
